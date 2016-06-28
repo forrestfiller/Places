@@ -13,6 +13,7 @@
 		B7F41C9C1D21E3320052BCE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F41C9A1D21E3320052BCE9 /* Main.storyboard */; };
 		B7F41C9E1D21E3320052BCE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F41C9D1D21E3320052BCE9 /* Assets.xcassets */; };
 		B7F41CA11D21E3320052BCE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F41C9F1D21E3320052BCE9 /* LaunchScreen.storyboard */; };
+		B7F41CAA1D21F0910052BCE9 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F41CA91D21F0910052BCE9 /* Venue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B7F41C9D1D21E3320052BCE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7F41CA01D21E3320052BCE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F41CA21D21E3320052BCE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F41CA91D21F0910052BCE9 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		C4B0FB8B18F4E641661C3725 /* Pods-Places-week-4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places-week-4.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places-week-4/Pods-Places-week-4.debug.xcconfig"; sourceTree = "<group>"; };
 		EEC45BDFAAE48A7AFDC3B546 /* Pods-Places-week-4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places-week-4.release.xcconfig"; path = "Pods/Target Support Files/Pods-Places-week-4/Pods-Places-week-4.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +71,7 @@
 		B7F41C951D21E3320052BCE9 /* Places-week-4 */ = {
 			isa = PBXGroup;
 			children = (
+				B7F41CA81D21F05C0052BCE9 /* Models */,
 				B7F41C961D21E3320052BCE9 /* AppDelegate.swift */,
 				B7F41C981D21E3320052BCE9 /* ViewController.swift */,
 				B7F41C9A1D21E3320052BCE9 /* Main.storyboard */,
@@ -77,6 +80,14 @@
 				B7F41CA21D21E3320052BCE9 /* Info.plist */,
 			);
 			path = "Places-week-4";
+			sourceTree = "<group>";
+		};
+		B7F41CA81D21F05C0052BCE9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B7F41CA91D21F0910052BCE9 /* Venue.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C1B4B070D8B621536EAEA239 /* Pods */ = {
@@ -211,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7F41C991D21E3320052BCE9 /* ViewController.swift in Sources */,
+				B7F41CAA1D21F0910052BCE9 /* Venue.swift in Sources */,
 				B7F41C971D21E3320052BCE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
