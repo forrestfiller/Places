@@ -10,10 +10,12 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var locationManager: CLLocationManager! //finds your location, this class
     var venueTextField: UITextField!
+    var vTableView: UITableView!
+    var venueList = Array<Venue>()
     
     
     override func loadView() {
@@ -23,11 +25,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         self.venueTextField = UITextField(frame: CGRect(x: 20, y: 84, width: frame.size.width-40, height: 22))
         venueTextField.backgroundColor = .whiteColor()
         self.venueTextField.delegate = self
-        view.addSubview(self.venueTextField)
+        self.vTableView.addSubview(self.venueTextField)
         self.view = view
-
+        
+        let vTableView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
+        vTableView.delegate = self
+        vTableView.dataSource = self
+        vTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        self.view.addSubview(self.vTableView)
+    
     }
-
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        tableView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
+//        tableView.delegate      =   self
+//        tableView.dataSource    =   self
+//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        self.view.addSubview(self.tableView)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,6 +115,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             print("UserTypedFashion: ")
         }
         return true
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let venue = self.venueList[indexPath.row]
+        
+        let cellId = "cellId"
+        if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
+            cell.textLabel?.text = "cellForRowAtIndexPath: "
+            return cell
+        }
+        
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+        cell.textLabel?.text = "cellForRowAtIndexPath: "
+        return cell
+
     }
 }
 
