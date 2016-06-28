@@ -120,7 +120,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
         cell.textLabel?.text = "cellForRowAtIndexPath: "
         return cell
-
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 88
     }
 }
 
