@@ -24,7 +24,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         venueTextField.backgroundColor = .whiteColor()
         self.venueTextField.delegate = self
         view.addSubview(self.venueTextField)
-        
         self.view = view
 
     }
@@ -54,8 +53,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             
             let latLng = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)"
             print("didUpdateLocations: \(latLng)")
-//            self.foursquareRequestFood(latLng)
-//            self.foursquareRequestFashion(latLng)
         }
         
     }
@@ -94,7 +91,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         let lng = self.locationManager.location!.coordinate.longitude
         let latLng = ("\(lat),\(lng)")
         print("didUpdateLocations: \(latLng)")
-        
         if textField.text == "Food" {
             self.foursquareRequestFood(latLng)
             print("USerTypedFood: ")
@@ -103,10 +99,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             self.foursquareRequestFashion(latLng)
             print("UserTypedFashion: ")
         }
-        
-        
-        
-
         return true
     }
 }
