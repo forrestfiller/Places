@@ -25,24 +25,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         self.venueTextField = UITextField(frame: CGRect(x: 20, y: 84, width: frame.size.width-40, height: 22))
         venueTextField.backgroundColor = .whiteColor()
         self.venueTextField.delegate = self
-        self.vTableView.addSubview(self.venueTextField)
+        view.addSubview(venueTextField)
         self.view = view
-        
-        let vTableView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
-        vTableView.delegate = self
-        vTableView.dataSource = self
-        vTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellId")
-        self.view.addSubview(self.vTableView)
     
     }
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        tableView = UITableView(frame: UIScreen.mainScreen().bounds, style: UITableViewStyle.Plain)
-//        tableView.delegate      =   self
-//        tableView.dataSource    =   self
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        self.view.addSubview(self.tableView)
-//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,7 +95,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         print("didUpdateLocations: \(latLng)")
         if textField.text == "Food" {
             self.foursquareRequestFood(latLng)
-            print("USerTypedFood: ")
+            print("UserTypedFood: ")
         }
         if textField.text == "Fashion" {
             self.foursquareRequestFashion(latLng)
