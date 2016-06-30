@@ -8,10 +8,12 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
 
     var mapView: MKMapView! //regular ui view
+    var currentLocation: CLLocation!
     
     
     override func loadView() {
@@ -20,6 +22,16 @@ class MapViewController: UIViewController {
         view.backgroundColor = .greenColor()
         
         self.mapView = MKMapView(frame: frame)
+        self.mapView.centerCoordinate = self.currentLocation.coordinate
+        
+        let dist = CLLocationDistance(500)
+        let region = MKCoordinateRegionMakeWithDistance(
+            self.mapView.centerCoordinate,
+            dist,
+            dist
+            )
+        self.mapView.setRegion(region, animated: true)
+        
         view.addSubview(self.mapView)
         
         self.view = view

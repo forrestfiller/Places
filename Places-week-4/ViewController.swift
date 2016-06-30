@@ -54,6 +54,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     func showMapView(){
         print("showMapView")
         let mapView = MapViewController()
+        mapView.currentLocation = self.locationManager.location
         self.navigationController?.pushViewController(mapView, animated: true)
     
     }
