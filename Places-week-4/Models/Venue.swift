@@ -10,14 +10,35 @@ import UIKit
 
 
 class Venue: NSObject {
-    
-    var food: String!
-    var fashion: String!
+    var name = ""
+    var location: Dictionary<String, AnyObject>?
+    var address = ""
+    var city = ""
+    var state = ""
+    var lat = 0.0
+    var lng = 0.0
 
     func populate(venueInfo: Dictionary<String, AnyObject>){
+        if let _name = venueInfo["name"] as? String {
+            self.name = _name
+        }
         
-        self.food = venueInfo["food"] as? String
-        self.fashion = venueInfo["fashion"] as? String
+        self.location = venueInfo["location"] as? Dictionary<String, AnyObject>
+        
+        if let _address = location!["address"] as? String {
+            self.address = _address
+        }
+        if let _city = location!["city"] as? String {
+            self.city = _city
+        }
+        if let _state = location!["state"] as? String {
+            self.state = _state
+        }
+        if let _lat = location!["lat"] as? Double {
+            self.lat = _lat
+        }
+        if let _lng = location!["lng"] as? Double {
+            self.lng = _lng
+        }
     }
-
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F249F1F2B96F693CB05CADE /* Pods_Places_week_4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC571DE2535B381B844CC49 /* Pods_Places_week_4.framework */; };
+		B7D77E421D249B8A00CC191B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D77E411D249B8A00CC191B /* MapViewController.swift */; };
 		B7F41C971D21E3320052BCE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F41C961D21E3320052BCE9 /* AppDelegate.swift */; };
 		B7F41C991D21E3320052BCE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F41C981D21E3320052BCE9 /* ViewController.swift */; };
 		B7F41C9C1D21E3320052BCE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F41C9A1D21E3320052BCE9 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		9FC571DE2535B381B844CC49 /* Pods_Places_week_4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Places_week_4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7D77E411D249B8A00CC191B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7F41C931D21E3320052BCE9 /* Places-week-4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Places-week-4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F41C961D21E3320052BCE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F41C981D21E3320052BCE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				B7F41CA81D21F05C0052BCE9 /* Models */,
 				B7F41C961D21E3320052BCE9 /* AppDelegate.swift */,
 				B7F41C981D21E3320052BCE9 /* ViewController.swift */,
+				B7D77E411D249B8A00CC191B /* MapViewController.swift */,
 				B7F41C9A1D21E3320052BCE9 /* Main.storyboard */,
 				B7F41C9D1D21E3320052BCE9 /* Assets.xcassets */,
 				B7F41C9F1D21E3320052BCE9 /* LaunchScreen.storyboard */,
@@ -224,6 +227,7 @@
 				B7F41C991D21E3320052BCE9 /* ViewController.swift in Sources */,
 				B7F41CAA1D21F0910052BCE9 /* Venue.swift in Sources */,
 				B7F41C971D21E3320052BCE9 /* AppDelegate.swift in Sources */,
+				B7D77E421D249B8A00CC191B /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

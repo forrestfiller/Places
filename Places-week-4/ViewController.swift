@@ -13,29 +13,67 @@ import Alamofire
 class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var locationManager: CLLocationManager! //finds your location, this class
-    var venueTextField: UITextField!
     var vTableView: UITableView!
-    var venueList = Array<Venue>()
+    var searchField: UITextField!
+    var venueList = Array<Venue>() //now we have a venues array
     
     
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
         view.backgroundColor = .lightGrayColor()
-        self.venueTextField = UITextField(frame: CGRect(x: 20, y: 84, width: frame.size.width-40, height: 22))
-        venueTextField.backgroundColor = .whiteColor()
-        self.venueTextField.delegate = self
-        view.addSubview(venueTextField)
+        
+        self.searchField = UITextField(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 24))
+        self.searchField.delegate = self
+        searchField.backgroundColor = .redColor()
+ 
+        self.vTableView = UITableView(frame: frame, style: .Plain)
+        self.vTableView.delegate = self
+        self.vTableView.dataSource = self
+        self.vTableView.tableHeaderView = searchField
+        view.addSubview(self.vTableView)
+
         self.view = view
-    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Map",
+            style: .Plain,
+            target: self,
+            action: #selector(ViewController.showMapView)
+        )
+        
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func showMapView(){
+        print("showMapView")
+        let mapView = MapViewController()
+        self.navigationController?.pushViewController(mapView, animated: true)
+    
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        let searchText = self.searchField.text!
+
+        let lat = self.locationManager.location!.coordinate.latitude
+        let lng = self.locationManager.location!.coordinate.longitude
+        let latLng = ("\(lat),\(lng)")
+        
+//        if textField.text == "Food" {
+//            self.foursquareRequest(latLng, query: searchText)
+//            print("UserTypedFood: ")
+//        }
+        self.foursquareRequest(latLng, query: searchText)
+        self.venueList.removeAll() //clear venue list so we don't keep appending
+        return true
         
     }
     
@@ -55,28 +93,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             
             let latLng = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)"
             print("didUpdateLocations: \(latLng)")
+
         }
-        
     }
     
-    func foursquareRequestFood(latLng: String){
-        let url = "https://api.foursquare.com/v2/venues/search?v=20140806&ll=\(latLng)&query=food&client_id=VZZ1EUDOT0JYITGFDKVVMCLYHB3NURAYK3OHB5SK5N453NFD&client_secret=UAA15MIFIWVKZQRH22KPSYVWREIF2EMMH0GQ0ZKIQZC322NZ"
+    func foursquareRequest(latLng: String, query: String){
+        let url = "https://api.foursquare.com/v2/venues/search?v=20140806&ll=\(latLng)&query=\(query)&client_id=VZZ1EUDOT0JYITGFDKVVMCLYHB3NURAYK3OHB5SK5N453NFD&client_secret=UAA15MIFIWVKZQRH22KPSYVWREIF2EMMH0GQ0ZKIQZC322NZ"
         
         print("\(url)")
         Alamofire.request(.GET, url, parameters: nil).responseJSON { response in
             if let json = response.result.value as? Dictionary<String, AnyObject>{
-                print("\(json)")
-            }
-        }
-    }
-    
-    func foursquareRequestFashion(latLng: String){
-        let url = "https://api.foursquare.com/v2/venues/search?v=20140806&ll=\(latLng)&query=fashion&client_id=VZZ1EUDOT0JYITGFDKVVMCLYHB3NURAYK3OHB5SK5N453NFD&client_secret=UAA15MIFIWVKZQRH22KPSYVWREIF2EMMH0GQ0ZKIQZC322NZ"
-        
-        print("\(url)")
-        Alamofire.request(.GET, url, parameters: nil).responseJSON { response in
-            if let json = response.result.value as? Dictionary<String, AnyObject>{
-                print("\(json)")
+                //print("\(json)")
+                
+                if let resp = json["response"] as? Dictionary<String, AnyObject>{
+                    //print("\(resp)")
+                
+                    if let venues = resp["venues"] as? Array<Dictionary<String, AnyObject>>{
+                       // print("\(venues)")
+                        
+                        for venueInfo in venues {
+                            let venueData = Venue() //instansiating an instance of "venue"
+                            venueData.populate(venueInfo)
+                            print("\(venueData.name)")
+                            self.venueList.append(venueData)
+                        }
+                            self.vTableView.reloadData()
+                    }
+                }
             }
         }
     }
@@ -85,26 +128,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         super.didReceiveMemoryWarning()
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-    // called when 'return' key pressed. return NO to ignore.
-        print("\(textField.text!)")
-        
-        let lat = self.locationManager.location!.coordinate.latitude
-        let lng = self.locationManager.location!.coordinate.longitude
-        let latLng = ("\(lat),\(lng)")
-        print("didUpdateLocations: \(latLng)")
-        if textField.text == "Food" {
-            self.foursquareRequestFood(latLng)
-            print("UserTypedFood: ")
-        }
-        if textField.text == "Fashion" {
-            self.foursquareRequestFashion(latLng)
-            print("UserTypedFashion: ")
-        }
-        return true
-    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.venueList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -113,20 +139,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
-            cell.textLabel?.text = "cellForRowAtIndexPath: "
+            cell.textLabel?.text = venue.name
+            cell.detailTextLabel?.text = venue.address+", "+venue.city+", "+venue.state+", "+"\(venue.lat)"+", "+"\(venue.lng)"
             return cell
         }
         
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-        cell.textLabel?.text = "cellForRowAtIndexPath: "
+        cell.textLabel?.text = venue.name
+        cell.detailTextLabel?.text = venue.address+", "+venue.city+", "+venue.state+", "+"\(venue.lat)"+", "+"\(venue.lng)"
         return cell
 
     }
+
+
+
+
+
 }
-
-
-
-
 
 
 
