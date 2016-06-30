@@ -25,7 +25,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         
         self.searchField = UITextField(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 24))
         self.searchField.delegate = self
-        searchField.backgroundColor = .redColor()
+        searchField.backgroundColor = .lightGrayColor()
+//        searchField.layer.cornerRadius = 8.0
  
         self.vTableView = UITableView(frame: frame, style: .Plain)
         self.vTableView.delegate = self
@@ -141,12 +142,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         
         let cellId = "cellId"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId){
+            cell.backgroundColor = .grayColor()
+            cell.contentView.backgroundColor = .grayColor()
             cell.textLabel?.text = venue.name
             cell.detailTextLabel?.text = venue.address+", "+venue.city+", "+venue.state+", "+"\(venue.lat)"+", "+"\(venue.lng)"
             return cell
         }
         
         let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+        cell.backgroundColor = .grayColor()
+        cell.contentView.backgroundColor = .grayColor()
         cell.textLabel?.text = venue.name
         cell.detailTextLabel?.text = venue.address+", "+venue.city+", "+venue.state+", "+"\(venue.lat)"+", "+"\(venue.lng)"
         return cell
