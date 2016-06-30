@@ -7,41 +7,28 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
 
+    var mapView: MKMapView! //regular ui view
+    
+    
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
         view.backgroundColor = .greenColor()
         
+        self.mapView = MKMapView(frame: frame)
+        view.addSubview(self.mapView)
+        
         self.view = view
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-
-        // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
