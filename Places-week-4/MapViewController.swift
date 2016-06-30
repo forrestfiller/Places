@@ -12,7 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
-    var mapView: MKMapView! //regular ui view
+    var mapView: MKMapView! //just like a regular ui view
     var currentLocation: CLLocation!
     var venueList: Array<Venue>! //need to know what to show: the list of venues
     

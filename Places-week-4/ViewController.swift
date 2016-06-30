@@ -150,7 +150,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         cell.textLabel?.text = venue.name
         cell.detailTextLabel?.text = venue.address+", "+venue.city+", "+venue.state+", "+"\(venue.lat)"+", "+"\(venue.lng)"
         return cell
-
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("didSelectRowAtIndexPath")
+        tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
     }
 
 
