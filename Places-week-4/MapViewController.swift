@@ -10,11 +10,11 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     var mapView: MKMapView! //regular ui view
     var currentLocation: CLLocation!
-    
+    var venueList: Array<Venue>! //need to know what to show: the list of venues
     
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
@@ -31,16 +31,37 @@ class MapViewController: UIViewController {
             dist
             )
         self.mapView.setRegion(region, animated: true)
-        
         view.addSubview(self.mapView)
-        
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.mapView.addAnnotations(self.venueList)
     }
+    
+        func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) ->
+            MKAnnotationView? {
+            
+            let pinId = "pinId"
+            if let pin = mapView.dequeueReusableAnnotationViewWithIdentifier(pinId) as?
+                MKPinAnnotationView {
+                pin.annotation = annotation
+                return pin
+            }
+            
+            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinId)
+                pin.canShowCallout = true
+                pin.animatesDrop = true
+                
+                return pin
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+
 }
+

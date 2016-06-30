@@ -55,6 +55,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         print("showMapView")
         let mapView = MapViewController()
         mapView.currentLocation = self.locationManager.location
+        mapView.venueList = self.venueList //show these venues please
         self.navigationController?.pushViewController(mapView, animated: true)
     
     }
